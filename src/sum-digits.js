@@ -21,7 +21,7 @@ function getSumOfDigits(n) {
             sum = Number(element) + sum;
         });
         if (sum > 9) {
-            getSumOfDigits(sum);
+            return getSumOfDigits(sum);
         } else {
             return sum;
         }
@@ -35,4 +35,3 @@ function getSumOfDigits(n) {
 module.exports = {
     getSumOfDigits,
 };
-
