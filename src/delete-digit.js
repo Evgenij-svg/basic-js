@@ -12,18 +12,18 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function deleteDigit(n) {
-const ArrayNumber=(n+'').split('')
-const MaxNumber=0;
-
-ArrayNumber.forEach((elem, index)=>{
-  const BuferArray=ArrayNumber;
-  console.log(Number((BuferArray.slice(index,ArrayNumber.length).toString().replace(/,/g, ''))))
-  // if(MaxNumber<Number(BuferArray.splice(index+1,1).toString())){
-
-  // }
-})
-
-
+  let ArrayNumber=(n+'').split('')
+  let MaxNumber=0;
+  ArrayNumber.forEach((elem,indx)=>{
+    const BuferArray=[...ArrayNumber];
+    BuferArray.splice(indx,1)
+    const str = BuferArray.join("");
+    const num = parseInt(str);
+    if(num>MaxNumber){
+      MaxNumber=num;
+    }
+  })
+  return MaxNumber
   // remove line with error and write your code here
 }
 
