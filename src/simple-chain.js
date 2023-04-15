@@ -6,41 +6,35 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 
 const chainMaker = {
-    Chain: [],
+    chain: [],
+  
     getLength() {
-        return this.Chain.length;
+      return this.chain.length;
     },
+    
     addLink(value) {
-        this.Chain.push(`( ${value} )`);
-        return chainMaker;
+      this.chain.push(`( ${value} )`);
+      return this;
     },
+    
     removeLink(position) {
-        if (position < 1) {
-            return new Error(
-                'throws an Error with message "You can\'t remove incorrect link!" on trying to remove wrong link'
-            );
-         }else if (position > this.Chain.length) {
-            return new Error(
-                'throws an Error with message "You can\'t remove incorrect link!" on trying to remove wrong link'
-            );
-        } else if (!(typeof position == 'number')) {
-            return new Error(
-                'throws an Error with message "You can\'t remove incorrect link!" on trying to remove wrong link'
-            );
-        }
-        else{
-            this.Chain.splice(position - 1, 1);
-        }
-        
-        return chainMaker;
+      if (!Number.isInteger(position) || position <= 0 || position > this.chain.length) {
+        throw new Error("You can't remove incorrect link!");
+      }
+      this.chain.splice(position - 1, 1);
+      return this;
     },
+    
     reverseChain() {
-        this.Chain.reverse();
-        return chainMaker;
+      this.chain.reverse();
+      return this;
     },
+    
     finishChain() {
-        return this.Chain.toString().replace(/,/g, '~~');
-    },
+      const result = this.chain.join("~~");
+      this.chain = [];
+      return result;
+    }
 };
 
 module.exports = {
